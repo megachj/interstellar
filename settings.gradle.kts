@@ -1,3 +1,3 @@
 rootProject.name = "interstellar"
 
-// include("parent:child:a")
+include(":basic")

@@ -1,9 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.5.3"
+    id("org.springframework.boot") version "2.5.4"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    id("com.palantir.docker") version "0.26.0"
 
     val kotlinVersion = "1.5.20"
     kotlin("jvm") version kotlinVersion
@@ -21,10 +20,6 @@ allprojects {
         set("mockkVersion", "1.11.0")
         set("kotlinLoggingVersion", "2.0.8")
         set("coroutinesSlf4jVersion", "1.5.1")
-        //set("springCloudReleaseTrainVersion", "2020.0.2")
-        //set("retrofitVersion", "2.9.0")
-        //set("springdocVersion", "1.5.10")
-        //set("bouncycastleVersion", "1.69")
     }
 }
 
@@ -39,7 +34,6 @@ configure(subprojects.filter { it.name !in libraryModules }) {
     apply(plugin = "kotlin")
     apply(plugin = "kotlin-spring")
     apply(plugin = "kotlin-jpa")
-    apply(plugin = "com.palantir.docker")
 
     group = "megachj"
     version = "0.0.1-SNAPSHOT"
@@ -71,18 +65,6 @@ configure(subprojects.filter { it.name !in libraryModules }) {
 
     tasks.withType<Test> {
         useJUnitPlatform()
-    }
-
-    docker {
-        val tagName = System.getenv("DOCKER_TAG") ?: "latest"
-        val imageName = System.getenv("DOCKER_IMG_NAME") ?: project.name
-        dependsOn(tasks.build.get())
-
-        name = "${imageName}:${tagName}"
-
-        val bootJar = tasks.bootJar.get()
-        files(bootJar.archiveFile.get().asFile)
-        buildArgs(mapOf("JAR_FILE" to bootJar.archiveFileName.get()))
     }
 }
 

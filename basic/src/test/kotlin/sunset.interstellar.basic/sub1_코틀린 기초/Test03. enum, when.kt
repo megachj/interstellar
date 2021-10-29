@@ -1,5 +1,28 @@
 package sunset.interstellar.basic.`sub1_코틀린 기초`
 
+import org.junit.jupiter.api.Test
+
+class Test03 {
+
+    @Test
+    fun `enum 클래스 사용`() {
+        println("빨간색 rgb: ${Color.RED.rgb()}")
+        println("노란색의 mnemoni: ${getMnemonic(Color.YELLOW)}")
+        println("파란색의 warmth: ${getWarmth(Color.BLUE)}")
+        println("파란색, 보라색을 섞으면: ${mix(Color.BLUE, Color.VIOLET)}")
+        println("노란색, 빨간색을 섞으면: ${mixOptimized(Color.YELLOW, Color.RED)}")
+    }
+
+    @Test
+    fun `스마트 캐스트 사용`() {
+        val expr = Sum(Sum(Num(1), Num(2)), Num(4))
+        println("eval: 1+2+4 = ${eval(expr)}")
+        println("evalRefactored: 1+2+4 = ${evalRefactored(expr)}")
+        println("evalWithLogging")
+        println("1+2+4 = ${evalWithLogging(expr)}")
+    }
+}
+
 // enum 클래스 정의
 enum class Color(
     val r: Int, val g: Int, val b: Int
@@ -35,8 +58,8 @@ fun getWarmth(color: Color) =
         Color.BLUE, Color.INDIGO, Color.VIOLET -> "cold"
     }
 
+// 함수가 호출될 때마다 주어진 두 색이 when 조건의 두 색과 같은지 비교하기 위해 여러 Set 인스턴스를 생성한다. 그래서 가비지 객체가 늘어난다.
 fun mix(c1: Color, c2: Color) =
-    // 함수가 호출될 때마다 주어진 두 색이 when 조건의 두 색과 같은지 비교하기 위해 여러 Set 인스턴스를 생성한다. 가비지 객체가 늘어남.
     when (setOf(c1, c2)) {
         setOf(Color.RED, Color.YELLOW) -> Color.ORANGE
         setOf(Color.YELLOW, Color.BLUE) -> Color.GREEN
@@ -60,10 +83,10 @@ fun mixOptimized(c1: Color, c2: Color) =
     }
 
 
-// 스마트 캐스트: 타입 검사와 타입 캐스트를 조합
+// 스마트 캐스트: 타입 검사와 타입 캐스트(변환)를 조합
 interface Expr
-class Num(val value: Int): Expr
-class Sum(val left: Expr, val right: Expr): Expr
+class Num(val value: Int) : Expr
+class Sum(val left: Expr, val right: Expr) : Expr
 
 fun eval(e: Expr): Int {
     if (e is Num) {
@@ -78,7 +101,7 @@ fun eval(e: Expr): Int {
 }
 
 fun evalRefactored(e: Expr): Int =
-    when(e) {
+    when (e) {
         is Num ->
             e.value
         is Sum ->
@@ -88,7 +111,7 @@ fun evalRefactored(e: Expr): Int =
     }
 
 fun evalWithLogging(e: Expr): Int =
-    when(e) {
+    when (e) {
         is Num -> {
             println("num: ${e.value}")
             e.value // '블록의 마지막 식이 블록의 결과' 라는 규칙은 블록이 값을 만들어내야 하는 경우 항상 성립!
@@ -96,7 +119,7 @@ fun evalWithLogging(e: Expr): Int =
         is Sum -> {
             val left = evalWithLogging(e.left)
             val right = evalWithLogging(e.right)
-            println("suM: $left + $right")
+            println("sum: $left + $right")
             left + right
         }
         else -> throw IllegalArgumentException("Unknown expression")

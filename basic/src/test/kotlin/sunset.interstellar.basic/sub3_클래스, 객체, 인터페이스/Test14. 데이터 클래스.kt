@@ -33,7 +33,7 @@ class Client(val name: String, val postalCode: Int) {
         if (other == null || other !is Client) // other 가 Client 인지 검사한다.
             return false
         return name == other.name &&
-                postalCode == other.postalCode
+            postalCode == other.postalCode
     }
 
     // HashMap, HashSet 과 같은 해시 기반 컨테이너에서 키로 사용할 수 있는 hashCode() 이다.

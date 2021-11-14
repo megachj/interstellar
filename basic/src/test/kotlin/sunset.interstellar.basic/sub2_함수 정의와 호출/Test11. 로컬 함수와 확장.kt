@@ -24,10 +24,10 @@ class User(val id: Int, val name: String, val address: String)
 // 코드 중복을 보여주는 예제
 fun saveUser(user: User) {
     if (user.name.isEmpty()) {
-        throw IllegalArgumentException("${user.id} empty name!");
+        throw IllegalArgumentException("${user.id} empty name!")
     }
     if (user.address.isEmpty()) {
-        throw IllegalArgumentException("${user.id} empty address!");
+        throw IllegalArgumentException("${user.id} empty address!")
     }
     // user 를 DB 에 저장한다...
 }
@@ -37,7 +37,7 @@ fun saveUser2(user: User) {
     // 로컬 함수는 자신이 속한 바깥 함수의 '모든 파라미터', '모든 변수' 를 사용할 수 있다.
     fun validate(value: String, fieldName: String) {
         if (value.isEmpty()) {
-            throw IllegalArgumentException("${user.id} empty $fieldName!");
+            throw IllegalArgumentException("${user.id} empty $fieldName!")
         }
     }
 
@@ -50,7 +50,7 @@ fun saveUser2(user: User) {
 fun User.validateBeforeSave() {
     fun validate(value: String, fieldName: String) {
         if (value.isEmpty()) {
-            throw IllegalArgumentException("$id empty $fieldName!");
+            throw IllegalArgumentException("$id empty $fieldName!")
         }
     }
 

@@ -25,7 +25,9 @@ class Test03 {
 
 // enum 클래스 정의
 enum class Color(
-    val r: Int, val g: Int, val b: Int
+    val r: Int,
+    val g: Int,
+    val b: Int
 ) {
     RED(255, 0, 0),
     ORANGE(255, 165, 0),
@@ -71,17 +73,16 @@ fun mixOptimized(c1: Color, c2: Color) =
     // 인자 없는 when 사용
     when {
         (c1 == Color.RED && c2 == Color.YELLOW) ||
-                (c1 == Color.YELLOW && c2 == Color.RED) ->
+            (c1 == Color.YELLOW && c2 == Color.RED) ->
             Color.ORANGE
         (c1 == Color.YELLOW && c2 == Color.BLUE) ||
-                (c1 == Color.BLUE && c2 == Color.YELLOW) ->
+            (c1 == Color.BLUE && c2 == Color.YELLOW) ->
             Color.GREEN
         (c1 == Color.BLUE && c2 == Color.VIOLET) ||
-                (c1 == Color.VIOLET && c2 == Color.BLUE) ->
+            (c1 == Color.VIOLET && c2 == Color.BLUE) ->
             Color.INDIGO
         else -> throw Exception("Dirty color")
     }
-
 
 // 스마트 캐스트: 타입 검사와 타입 캐스트(변환)를 조합
 interface Expr

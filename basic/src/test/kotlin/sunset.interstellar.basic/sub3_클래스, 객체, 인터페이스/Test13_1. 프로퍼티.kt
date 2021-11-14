@@ -60,7 +60,7 @@ class User5(val name: String) {
                 """
                 Address was changed for $name:
                 "$field" -> "$value" 
-            """.trimIndent()
+                """.trimIndent()
             )
             field = value // 뒷받침하는 필드 값 변경하기
         }

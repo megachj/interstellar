@@ -1,7 +1,6 @@
 package sunset.interstellar.basic.`sub3_클래스, 객체, 인터페이스`
 
 import org.junit.jupiter.api.Test
-import java.io.Serializable
 
 class Test12 {
 

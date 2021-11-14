@@ -2,9 +2,7 @@ package sunset.interstellar.basic.`sub3_클래스, 객체, 인터페이스`
 
 import java.io.Serializable
 
-class Test12_1 {
-
-}
+class Test12_1
 
 interface State : Serializable
 
@@ -20,7 +18,7 @@ class Button2 : View {
 
     // 중첩 클래스: 바깥쪽 클래스에 대한 참조를 저장하지 않음
     // 자바의 public static class ButtonState implements State 와 같다.
-    class ButtonState2 : State {}
+    class ButtonState2 : State
 }
 
 class Outer {

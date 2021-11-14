@@ -72,3 +72,8 @@ class PersonA(val name: String) {
         }
     }
 }
+
+// 동반 객체에서 인터페이스 구현하기
+interface JSONFactory<T> {
+    fun fromJSON(jsonText: String): T
+}

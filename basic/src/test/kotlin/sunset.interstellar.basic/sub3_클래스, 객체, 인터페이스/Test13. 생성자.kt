@@ -1,8 +1,6 @@
 package sunset.interstellar.basic.`sub3_클래스, 객체, 인터페이스`
 
-class Test13 {
-
-}
+class Test13
 
 // 아래처럼 클래스 뒤에 괄호로 둘러싸인 코드를 주 생성자(primary constructor) 라고 부른다.
 class User(val nickname: String)
@@ -31,8 +29,7 @@ class User3(_nickname: String) {
 open class OpenUser(val nickname: String)
 
 // 클래스에 기반 클래스가 있다면 주 생성자에서 기반 클래스의 생성자를 호출해야 한다.
-class TwitterUser(nickname: String) : OpenUser(nickname) {}
-
+class TwitterUser(nickname: String) : OpenUser(nickname)
 
 open class Button1 // 인자가 없는 디폴트 생성자가 만들어진다.
 class RadioButton : Button1()

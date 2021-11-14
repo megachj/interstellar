@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.5.4"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 
     val kotlinVersion = "1.5.20"
     kotlin("jvm") version kotlinVersion
@@ -14,6 +15,8 @@ allprojects {
     repositories {
         mavenCentral()
     }
+
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
     ext {
         set("kotestVersion", "4.2.6")
@@ -49,11 +52,11 @@ configure(subprojects.filter { it.name !in libraryModules }) {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
-        testImplementation("io.kotest:kotest-runner-junit5-jvm:${kotestVersion}")
-        testImplementation("io.mockk:mockk:${mockkVersion}")
+        testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
+        testImplementation("io.mockk:mockk:$mockkVersion")
 
-        implementation("io.github.microutils:kotlin-logging-jvm:${kotlinLoggingVersion}")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${coroutinesSlf4jVersion}")
+        implementation("io.github.microutils:kotlin-logging-jvm:$kotlinLoggingVersion")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesSlf4jVersion")
     }
 
     tasks.withType<KotlinCompile> {

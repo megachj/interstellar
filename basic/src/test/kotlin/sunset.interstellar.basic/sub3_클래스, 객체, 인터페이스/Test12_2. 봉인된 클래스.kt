@@ -1,8 +1,6 @@
 package sunset.interstellar.basic.`sub3_클래스, 객체, 인터페이스`
 
-class Test12_2 {
-
-}
+class Test12_2
 
 interface Expr
 class Num(val value: Int) : Expr
@@ -26,7 +24,7 @@ sealed class SealedExpr {
     class Sum(val left: Expr, val right: Expr) : SealedExpr()
 }
 
-fun eval(e: SealedExpr) : Int =
+fun eval(e: SealedExpr): Int =
     // when 식이 모든 하위 클래스를 검사하므로 별도의 else 디폴트 분기가 없어도 된다.
     when (e) {
         is SealedExpr.Num -> e.value

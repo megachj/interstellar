@@ -32,7 +32,7 @@ class Test01 {
         // number = "일" // 변수의 타입은 고정이므로 불가능
 
         number = 2
-        println("after: ${number}")
+        println("after: $number")
     }
 
     @Test
@@ -51,5 +51,5 @@ fun max3(a: Int, b: Int) = if (a > b) a else b
 
 // 문자열 템플릿
 fun printHello(name: String, args: List<String>) {
-    println("Hello ${name}! your args 2.. ${args[0]}, ${args[1]}")
+    println("Hello $name! your args 2.. ${args[0]}, ${args[1]}")
 }

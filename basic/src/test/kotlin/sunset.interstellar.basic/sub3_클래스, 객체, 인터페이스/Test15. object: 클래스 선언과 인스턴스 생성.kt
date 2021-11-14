@@ -77,3 +77,20 @@ class PersonA(val name: String) {
 interface JSONFactory<T> {
     fun fromJSON(jsonText: String): T
 }
+
+class PersonB(val name: String) {
+    companion object : JSONFactory<PersonB> {
+        override fun fromJSON(jsonText: String): PersonB =
+            PersonB("JSON")
+    }
+}
+
+// 동반 객체에 대한 확장 함수 정의하기
+// 비즈니스 로직 모듈
+class PersonC(val firstName: String, val lastName: String) {
+    companion object { // 비어있는 동반 객체를 선언한다.
+    }
+}
+
+fun PersonC.Companion.fromJSON(json: String): PersonC = // 확장 함수를 선언한다.
+    PersonC("침", "착맨")

@@ -12,46 +12,38 @@ plugins {
 }
 
 allprojects {
+    group = "sunset"
+    version = "0.0.1"
+
     repositories {
         mavenCentral()
     }
 
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    apply(plugin = "kotlin")
 
     ext {
+        set("jacksonVersion", "2.13.0")
+        set("jetbrainsKotlinLibraryVersion", "1.6.0")
         set("kotestVersion", "4.2.6")
         set("mockkVersion", "1.11.0")
         set("kotlinLoggingVersion", "2.0.8")
         set("coroutinesSlf4jVersion", "1.5.1")
     }
-}
 
-// 실행가능한 application 이 아닌, 라이브러리용 모듈
-val libraryModules = listOf("")
-
-configure(subprojects.filter { it.name !in libraryModules }) {
-
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
-
-    apply(plugin = "kotlin")
-    apply(plugin = "kotlin-spring")
-    apply(plugin = "kotlin-jpa")
-
-    group = "megachj"
-    version = "0.0.1-SNAPSHOT"
-
+    // variables
+    val jacksonVersion: String by ext
+    val jetbrainsKotlinLibraryVersion: String by ext
     val kotestVersion: String by ext
     val mockkVersion: String by ext
     val kotlinLoggingVersion: String by ext
     val coroutinesSlf4jVersion: String by ext
 
     dependencies {
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-        implementation("org.jetbrains.kotlin:kotlin-reflect")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+        implementation("org.jetbrains.kotlin:kotlin-reflect:$jetbrainsKotlinLibraryVersion")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$jetbrainsKotlinLibraryVersion")
 
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
         testImplementation("io.mockk:mockk:$mockkVersion")
 
@@ -71,7 +63,24 @@ configure(subprojects.filter { it.name !in libraryModules }) {
     }
 }
 
-configure(listOf(rootProject) + subprojects.filter { it.parent?.name in libraryModules }) {
+// 하위 모듈 설정
+val springKotlinModules = listOf("")
+configure(subprojects.filter { it.name in springKotlinModules }) {
+    apply(plugin = "org.springframework.boot")
+    apply(plugin = "io.spring.dependency-management")
+
+    apply(plugin = "kotlin-spring")
+    apply(plugin = "kotlin-jpa")
+
+    dependencies {
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    }
+}
+
+val libraryGroups = listOf("")
+configure(listOf(rootProject) + subprojects.filter { it.parent?.name in libraryGroups }) {
     tasks.bootJar { enabled = false }
     tasks.jar { enabled = true }
 }

@@ -2,7 +2,7 @@ package sunset.interstellar.basic.`sub1_코틀린 기초`
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import java.util.*
+import java.util.TreeMap
 
 class Test04 {
 

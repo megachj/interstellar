@@ -25,9 +25,9 @@ allprojects {
     ext {
         set("jacksonVersion", "2.13.0")
         set("jetbrainsKotlinLibraryVersion", "1.6.0")
-        set("kotestVersion", "4.2.6")
-        set("mockkVersion", "1.11.0")
-        set("kotlinLoggingVersion", "2.0.8")
+        set("kotestVersion", "4.6.3")
+        set("mockkVersion", "1.12.0")
+        set("kotlinLoggingVersion", "2.0.11")
         set("coroutinesSlf4jVersion", "1.5.1")
     }
 
